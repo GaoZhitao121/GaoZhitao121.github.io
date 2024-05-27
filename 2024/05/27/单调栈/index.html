@@ -16,25 +16,27 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="若干MLLM经典工作的粗读">
+    <meta name="description" content="单调栈leetcode选做,持续更新中">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图文多模态大模型工作粗读">
-<meta property="og:url" content="http://example.com/2024/05/12/%E5%9B%BE%E6%96%87%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B7%A5%E4%BD%9C%E7%B2%97%E8%AF%BB/index.html">
+<meta property="og:title" content="单调栈">
+<meta property="og:url" content="http://example.com/2024/05/27/%E5%8D%95%E8%B0%83%E6%A0%88/index.html">
 <meta property="og:site_name" content="GaoZhitao">
-<meta property="og:description" content="若干MLLM经典工作的粗读">
+<meta property="og:description" content="单调栈leetcode选做,持续更新中">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/GaoZhitao121/picture_bed@main//blog-img/image-20240511193627474.png">
-<meta property="article:published_time" content="2024-05-12T13:46:10.000Z">
-<meta property="article:modified_time" content="2024-05-12T13:49:29.143Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/GaoZhitao121/picture_bed@main//blog-img/image-20240526125550053.png">
+<meta property="article:published_time" content="2024-05-27T02:21:46.000Z">
+<meta property="article:modified_time" content="2024-05-27T02:41:28.153Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="单调栈">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/GaoZhitao121/picture_bed@main//blog-img/image-20240511193627474.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/GaoZhitao121/picture_bed@main//blog-img/image-20240526125550053.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>图文多模态大模型工作粗读 - GaoZhitao</title>
+  <title>单调栈 - GaoZhitao</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -227,7 +229,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="图文多模态大模型工作粗读"></span>
+            <span id="subtitle" data-typed-text="单调栈"></span>
           
         </div>
 
@@ -238,8 +240,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-12 21:46" pubdate>
-          2024年5月12日 晚上
+        <time datetime="2024-05-27 10:21" pubdate>
+          2024年5月27日 上午
         </time>
       </span>
     
@@ -250,7 +252,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          650 字
         
       </span>
     
@@ -261,7 +263,7 @@
         
         
         
-          13 分钟
+          6 分钟
         
       </span>
     
@@ -298,100 +300,43 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">图文多模态大模型工作粗读</h1>
+            <h1 id="seo-header">单调栈</h1>
             
             
               <div class="markdown-body">
                 
-                <p>MLLM</p>
-<p><strong>Learning Transferable Visual Models From Natural Language Supervision</strong> (CLIP)</p>
-<p>Motivation:</p>
-<ul>
-<li>当前迁移学习的流行范式仍然需要少量任务特定样本对模型进行微调，作者希望利用自然语言做监督信号实现零样本学习。</li>
-<li>之前的工作受限于模型发展和数据规模效果不佳，作者采用先进的transformer模型，构建了从互联网爬取的包含4亿图像文本对的数据集WIT。</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/GaoZhitao121/picture_bed@main//blog-img/image-20240511193310600.png" srcset="/img/loading.gif" lazyload alt="CLIP"></p>
-<p>CLIP核心思想是通过<strong>海量</strong>的<strong>弱监督</strong>图像文本对通过对比学习，将图片和文本通过各自的<strong>预训练</strong>模型获得的编码向量在向量空间上<strong>对齐</strong>。</p>
-<p>为什么是弱监督的呢？我想这里并非只有对角线上的才严格匹配，比如一个图是狗狗，一个batch里面其他文本也可能有狗狗。还有就是互联网上的这种图像文本对无法保证数量，也就是说并不是严格aligned的。</p>
-<p>CLIP的zero-shot能力突出，可以在没有见过的数据上完成分类，我认为这可能来源于其庞大的数据量（来自互联网的四亿个图像文本对）。大力出奇迹。</p>
+                <hr>
 <hr>
-<p><strong>BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation</strong></p>
-<p>motivation：</p>
-<ul>
-<li><p>Bootstrapping: 用于训练的图像文本数据存在噪声（从互联网上爬取），如何清洗噪声？</p>
-</li>
-<li><p>Unified:encoder-model(理解)不适合做文本生成，encoder-decoder model（生成）不适合做图像文本检索，正如标题中Unified Vision-Language Understanding and Generation，作者想做一个<strong>多任务模型</strong>。</p>
-</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/GaoZhitao121/picture_bed@main//blog-img/image-20240511201902580.png" srcset="/img/loading.gif" lazyload alt="BLIP"></p>
-<p>三塔模型，相同颜色共享参数。	</p>
-<p>模型：</p>
-<ul>
-<li><p>图像分支：ImageNet预训练的ViT-8</p>
-</li>
-<li><p>文本多任务分支：</p>
-<ul>
-<li>Text-encoder(对比学习图像文本匹配分支): 预训练的Bert，对比学习I和T向量尽量对齐。</li>
-<li>Image-grounded text encoder(二分类图像文本细粒度匹配分支)： CA模块插入图像特征</li>
-</ul>
 <blockquote>
-<p>二分类任务一个关键的点是如何构造负样本，具体来讲，是足够难的负样本，这里可以用ITC任务失败的图像文本对来作为负样本。</p>
+<p>本文用于收集记录刷题过程中遇到的单调栈题目。</p>
 </blockquote>
+<p>单调栈方法解析：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1VN411J7S7/?spm_id_from=333.337.search-card.all.click&vd_source=45cecc5b6f7a6b5baabaae68f0b16192">单调栈【基础算法精讲 26】_哔哩哔哩_bilibili</a></p>
+<p>单调栈题单：<a target="_blank" rel="noopener" href="https://leetcode.cn/circle/discuss/9oZFK9/">https://leetcode.cn/circle/discuss/9oZFK9/</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/GaoZhitao121/picture_bed@main//blog-img/image-20240527102913832.png" srcset="/img/loading.gif" lazyload alt="每日温度"></p>
+<p><em><strong>及时去掉无用数据，</strong></em></p>
+<p><em><strong>保证栈中数据有序。</strong></em></p>
 <ul>
-<li>Image-grounded text decoder(生成文本描述)：CSA代替BSA，MASK后续token，避免待预测token泄露</li>
+<li>从右到左：</li>
 </ul>
-</li>
-</ul>
-<p>如何处理噪声数据：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/GaoZhitao121/picture_bed@main//blog-img/image-20240511202246302.png" srcset="/img/loading.gif" lazyload alt="BLIP"></p>
-<p>​	这是BLIP的另一大贡献，如何<strong>清洗弱监督的图像文本数据</strong>。</p>
+<p>栈中记录下一个更大元素的「候选项」。栈中记录的是下标。当前元素比栈顶更大时，就可以弹出栈顶元素了。为什么呢？因为这些元素永远不可能作为之后遍历的元素的[下一个更大值]，好比从左往右去看一座座山峰，已经被挡住了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dailyTemperatures</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;temperatures)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = temperatures.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">ans</span><span class="hljs-params">(n)</span></span>;<br>        stack&lt;<span class="hljs-type">int</span>&gt; st;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-type">int</span> t = temperatures[i];<br>            <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>() &amp;&amp; t &gt;= temperatures[st.<span class="hljs-built_in">top</span>()]) &#123;<br>                st.<span class="hljs-built_in">pop</span>();<br>            &#125;<br>            <span class="hljs-keyword">if</span> (!st.<span class="hljs-built_in">empty</span>()) &#123;<br>                ans[i] = st.<span class="hljs-built_in">top</span>() - i;<br>            &#125;<br>            st.<span class="hljs-built_in">push</span>(i);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br>作者：灵茶山艾府<br>链接：https:<span class="hljs-comment">//leetcode.cn/problems/daily-temperatures/solutions/2470179/shi-pin-jiang-qing-chu-wei-shi-yao-yao-y-k0ks/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
 <ul>
-<li><p>第一步，我们在训练时把人标注的，我们认为顶级数据和互联网上标注的，一般的，可能存在的噪声数据，一起放进去训练，然后拿这份数据去pretrain ITC，ITM和LM的训练。</p>
-</li>
-<li><p>第二步，我们用人类的标注数据去tuning 这3个下游任务。这样，这3个模型其实就接近于我们想要的效果了，符合了下游任务的范式，这还没完。</p>
-</li>
-<li><p>第三步，把互联网标注的语料，拿ITC，和ITM给过滤了（判断图文是否匹配），错的，我就不要了，只留下好的，就是Tw的绿色部分，另外还可以用LM来标注成Ts（可能不准确）过滤一遍，再和老的数据，重新灌注给模型的变成新的pretrain，完成下一个epoch，周而复始，把不断迭代优化Loss。</p>
-</li>
+<li>从左到右：</li>
 </ul>
-<p>​	以上就是Blip的创新和训练方式。</p>
+<p>栈中记录还没算出「下一个更大元素」的那些数（的下标）。一旦发现了比栈顶更大（后边指的更大、更小都是下标对应的数之间的比较）的数，就更新栈顶元素的答案，弹出栈顶。如果当前元素比栈顶小就入栈，这里比栈顶小且一定比栈中所有元素都小，意味着无法更新栈中任意一个元素的答案。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dailyTemperatures</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;temperatures)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = temperatures.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">ans</span><span class="hljs-params">(n)</span></span>;<br>        stack&lt;<span class="hljs-type">int</span>&gt; st;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> t = temperatures[i];<br>            <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>() &amp;&amp; t &gt; temperatures[st.<span class="hljs-built_in">top</span>()]) &#123;<br>                <span class="hljs-type">int</span> j = st.<span class="hljs-built_in">top</span>();<br>                st.<span class="hljs-built_in">pop</span>();<br>                ans[j] = i - j;<br>            &#125;<br>            st.<span class="hljs-built_in">push</span>(i);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br><br>作者：灵茶山艾府<br>链接：https:<span class="hljs-comment">//leetcode.cn/problems/daily-temperatures/solutions/2470179/shi-pin-jiang-qing-chu-wei-shi-yao-yao-y-k0ks/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure>
+
 <hr>
-<p><strong>BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/GaoZhitao121/picture_bed@main//blog-img/image-20240511204632454.png" srcset="/img/loading.gif" lazyload alt="BLIP2"></p>
-<p>​	BLIP的缺点是要重新训练模型，训练的参数量还比较大。且还有一个数据的问题，图像数据很多，文本数据也很多，那么图像文本对的数据就比较少了，CLIP这里是爬取的互联网上的图片和注释，噪声较多。</p>
-<p>​	左边是表征学习，右边是生成学习。</p>
-<p>创新点：</p>
-<ul>
-<li>在Image Encoder和LLM中间搭建了一座桥(轻量架构QFormer（querying transformer）来建立图像-文本的对齐的bridge)，将表征学习得到的向量投射到文本向量附近，能够被语言模型所理解（图像prompt），而图像encoder和文本decoder是被冻结而不需要参数的。只需要训练Q-Former即可。</li>
-<li>二阶段预训练范式实现高效训练，实现将目前的视觉backbone与LLM模型连接起来。 (后面就随便换了，LLM越强，模型越强，比如GPT4…)</li>
-</ul>
-<blockquote>
-<p>表征学习：在保留图像信息的前提下变为一个向量。</p>
+<p><strong>例题：</strong></p>
+<h4 id="503-下一个更大元素-II"><a href="#503-下一个更大元素-II" class="headerlink" title="503. 下一个更大元素 II"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-ii/">503. 下一个更大元素 II</a></h4><blockquote>
+<p>单调栈+循环数组，从左到右。</p>
 </blockquote>
-<p>训练阶段一：训练Q-Former</p>
-<p><img src="https://cdn.jsdelivr.net/gh/GaoZhitao121/picture_bed@main//blog-img/image-20240512191626001.png" srcset="/img/loading.gif" lazyload alt="BLIP2"></p>
-<p>训练阶段二：将对齐后的表征向量映射到LLM中，使得模型获得图片信息，进行指令微调。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/GaoZhitao121/picture_bed@main//blog-img/image-20240512192417498.png" srcset="/img/loading.gif" lazyload alt="QFORMER"></p>
-<img src="https://cdn.jsdelivr.net/gh/GaoZhitao121/picture_bed@main//blog-img/image-20240512214432229.png" srcset="/img/loading.gif" lazyload alt="image-20240512214432229" style="zoom:50%;" />
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">nextGreaterElements</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        stack&lt;<span class="hljs-type">int</span>&gt; stk;<br>        <span class="hljs-type">int</span> n = nums.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">ret</span><span class="hljs-params">(n,<span class="hljs-number">-1</span>)</span></span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n*<span class="hljs-number">2</span><span class="hljs-number">-1</span>; i ++)&#123;<br>            <span class="hljs-keyword">while</span>(!stk.<span class="hljs-built_in">empty</span>() &amp;&amp; nums[stk.<span class="hljs-built_in">top</span>()] &lt; nums[i % n])&#123;<br>                ret[stk.<span class="hljs-built_in">top</span>()] = nums[i % n];<br>                stk.<span class="hljs-built_in">pop</span>();<br>            &#125;<br>            stk.<span class="hljs-built_in">push</span>(i%n);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ret;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 
 
-<p>缺点：对细节的处理不到位，可能是ViT图像编码器的限制，不能把所有的细节都抽出来。（教科书示意图问答）</p>
-<hr>
-<p><strong>LLaVA:Visual Instruction Tuning</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/GaoZhitao121/picture_bed@main//blog-img/image-20240511193627474.png" srcset="/img/loading.gif" lazyload alt="llava"></p>
-<p>它是2阶段训练：</p>
-<p>   第一阶段，拿clip 的image encoder来训练，冻结住LLM，经过一个W的project转换（可以理解为线性层的矩阵对齐），说白了，就是一个线性层，image转换embedding的层W。第一阶段是将image和text特征进行对齐。</p>
-<p>  第二阶段，冻住image encoder，然后再训练W和LLM，它是将图片还有prompt的语料（这prompt语料是GPT生成的关于这个图片的问题）一齐作为输入，然后把这个东西输入进随便什么LLM来训练，也是有监督的，监督的label就是生成的响应语句，求Loss。第二阶段是让大语言模型理解图片和文本，并具有多轮对话能力，是一个微调过程</p>
-<hr>
-<p>总结：</p>
-<p>① 更强大的单模态模型影响效果。</p>
-<p>② LLM指令学习丰富VQA任务数据。</p>
-<p>③ 冻结大模型保留表征能力，对特征进行对齐。</p>
-<p>反思：</p>
-<p>① 使用LLM帮助生成数据会引入噪声信息。夹带私货？</p>
-<p>② 示意图问答要求更加细粒度图像特征，如何得到。</p>
-<p>③ 多模态大模型在教科书示意图问答方面如何应用。</p>
-<p>挖坑：transformer llm</p>
+<p><em><strong>to be continue….</strong></em></p>
 
                 
               </div>
@@ -410,7 +355,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="category-chain-item">论文阅读</a>
+  <a href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/" class="category-chain-item">算法题</a>
   
   
 
@@ -422,6 +367,15 @@
     </div>
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
+      
+        <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" class="print-no-link">#单调栈</a>
+      
+    </div>
+  
 </div>
 
 
@@ -430,8 +384,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>图文多模态大模型工作粗读</div>
-      <div>http://example.com/2024/05/12/图文多模态大模型工作粗读/</div>
+      <div>单调栈</div>
+      <div>http://example.com/2024/05/27/单调栈/</div>
     </div>
     <div class="license-meta">
       
@@ -443,7 +397,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年5月12日</div>
+          <div>2024年5月27日</div>
         </div>
       
       
@@ -475,18 +429,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/05/27/%E5%8D%95%E8%B0%83%E6%A0%88/" title="单调栈">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">单调栈</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/05/05/Work/" title="What Is ChatGPT Doing and Why Does it Work?">
-                        <span class="hidden-mobile">What Is ChatGPT Doing and Why Does it Work?</span>
+                      <a href="/2024/05/12/%E5%9B%BE%E6%96%87%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B7%A5%E4%BD%9C%E7%B2%97%E8%AF%BB/" title="图文多模态大模型工作粗读">
+                        <span class="hidden-mobile">图文多模态大模型工作粗读</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
